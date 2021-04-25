@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,9 @@ public class GreetingController {
 	@Autowired
 	private IGreetingService greetingService;
 	
-	@GetMapping("/getGreeting")
-	public Greeting getGreeting(@RequestParam(value="firstName") Optional<String> firstName, 
-			@RequestParam(value="lastName") Optional<String> lastName) {
-		String name = "";
-		if(firstName.isPresent())
-			name += firstName.get();
-		if(lastName.isPresent())
-			name += " " + lastName.get();
-		if(name.length() == 0)
-			name = "Hello World";
-		return greetingService.getGreeting(name);
+	@GetMapping("/getGreetings")
+	public List<Greeting> getGreeting(@RequestParam(value="name", defaultValue="World") String name) {
+		return greetingService.getGreetings();
 	}
 	
 	@PutMapping("/putGreeting")
@@ -39,8 +32,15 @@ public class GreetingController {
 	}
 	
 	@PostMapping("/postGreeting")
-	public Greeting postGreeting(@RequestParam(value="name") String name) {
+	public Greeting postGreeting(@RequestParam(value="firstName") Optional<String> firstName, 
+			@RequestParam(value="lastName") Optional<String> lastName) {
+		String name = "";
+		if(firstName.isPresent())
+			name += firstName.get();
+		if(lastName.isPresent())
+			name += " " + lastName.get();
+		if(name.length() == 0)
+			name = "Hello World";
 		return greetingService.postGreeting(name);
 	}
-
 }
