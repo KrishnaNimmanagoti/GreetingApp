@@ -27,9 +27,9 @@ public class GreetingController {
 		return greetingService.getGreetings();
 	}
 	
-	@PutMapping("/putGreeting")
-	public Greeting putGreeting(@RequestParam(value="name", defaultValue="Unidentified") String name) {
-		return greetingService.putGreeting(name);
+	@PutMapping("/putGreeting/{id}")
+	public Greeting putGreeting(@RequestParam(value="message", defaultValue="Not provided") String message, @PathVariable Long id) {
+		return greetingService.putGreeting(message, id);
 	}
 	
 	@PostMapping("/postGreeting")
@@ -45,7 +45,7 @@ public class GreetingController {
 		return greetingService.postGreeting(name);
 	}
 	
-	@GetMapping("/getGreetingById/{id}")
+	@GetMapping("/getGreeting/{id}")
 	public Greeting getGreetingById(@PathVariable Long id) {
 		return greetingService.getGreetingById(id);
 	}

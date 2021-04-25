@@ -7,7 +7,7 @@ import com.example.demo.model.Greeting;
 public interface IGreetingService {
 	
 	List<Greeting> getGreetings();
-	Greeting putGreeting(String name);
+	Greeting putGreeting(String greetingMessage, Long id);
 	Greeting postGreeting(String name);
 	Greeting getGreetingById(Long id);
 
