@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +43,10 @@ public class GreetingController {
 		if(name.length() == 0)
 			name = "Hello World";
 		return greetingService.postGreeting(name);
+	}
+	
+	@GetMapping("/getGreeting/{id}")
+	public Greeting getGreetingById(@PathVariable Long id) {
+		return greetingService.getGreetingById(id);
 	}
 }
